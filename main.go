@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 
+	kafka2 "github.com/codeedu/imersaofsfc-simulator/application/kafka"
 	"github.com/codeedu/imersaofsfc-simulator/infra/kafka"
 	ckafka "github.com/confluentinc/confluent-kafka-go/kafka"
 	"github.com/joho/godotenv"
@@ -26,10 +27,6 @@ func main() {
 
 	for msg := range msgChan {
 		fmt.Println(string(msg.Value))
+		go kafka2.Produce(msg)
 	}
-
-	// route := route.Route{ID: "1", ClientID: "1"}
-	// route.LoadPositions()
-	// stringjson, _ := route.ExportsJsonPositions()
-	// fmt.Println(stringjson[0])
 }
